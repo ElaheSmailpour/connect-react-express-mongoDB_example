@@ -27,4 +27,5 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, () => { console.log("Läuft auf Port" + port) })
 
-// im terminal npm run alles
+//  im terminal cd  backend und node server.js und noch eine terminal  cd alles und dann npm start 
+
