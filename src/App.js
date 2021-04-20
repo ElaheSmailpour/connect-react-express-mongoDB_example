@@ -1,10 +1,13 @@
+//import Question from "./components/Questions"
+//import Data from './components/Data'
+import Fragen from "./components/Fragen"
 
-import Data from './components/Data'
 function App() {
   return (
     <div className="App">
-      <p>React...</p>
-      <Data/>
+ 
+     <Fragen/>
+    
     </div>
   );
 }
