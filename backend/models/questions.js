@@ -17,4 +17,4 @@ const Questions = new Schema(
 
 );
 
-module.exports = mongoose.model("dataquiz", Questions);
+module.exports = mongoose.model("test", Questions);
