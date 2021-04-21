@@ -30,19 +30,20 @@ const FragenAngaben = ({ propsFrage, propsFragenLänge, propsFragenIndex }) => {
             <p className={"FragenAngabenText"}>{propsFrage.question}</p>
             <ul>
                 {propsFrage.answer.map((answerItem, answerIndex) =>
-               
+
                     <li>
-                        <button  onClick={() => AnwserButton(answerItem)}>{answerItem}</button>
-                        {console.log("answerItem=",answerItem)}
-                        {console.log("answerIndex=",answerIndex)}
-                        {console.log("optionSelected=",showAnswer.optionSelected)}
+                        <button onClick={() => AnwserButton(answerItem)}>{answerItem}</button>
+                        {console.log("answerItem=", answerItem)}
+                        {console.log("answerIndex=", answerIndex)}
+                        {console.log("optionSelected=", showAnswer.optionSelected)}
+                        
                         {showAnswer.show && propsFrage.correct === answerIndex && showAnswer.optionSelected === answerItem && <span className="text-success">{"Richtige Antwort"}</span>}
                         {showAnswer.show && showAnswer.optionSelected === answerItem && propsFrage.correct !== answerIndex && <span className="text-danger">{"Falsche Antwort"}</span>}
                     </li>
                 )}
             </ul>
-            
-       
+
+
         </div>
     )
 }

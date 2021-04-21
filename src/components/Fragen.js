@@ -35,7 +35,7 @@ const Fragen = () => {
     }
     return (
         <div className="Fragen">
-            <h1>Fragen seite...</h1>
+           
             {data.length > 0 && <FragenAngaben propsFragenIndex={FragenIndex +1} propsFragenLänge={data.length} propsFrage={data[FragenIndex]}/>}
            
            
