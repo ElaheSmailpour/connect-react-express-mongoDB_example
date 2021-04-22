@@ -1,66 +1,49 @@
 
-
 import Containerfragen from "./Containerfragen";
-
-import { useEffect, useState } from "react";
-//import { useHistory } from 'react-router-dom'
-
-
-
+import {useState } from "react";
+import { useHistory } from 'react-router-dom'
+//import axios from 'axios';
 
 const Test = () => {
 
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0)
-
-    //const Vergangenheit = useHistory()
-    /*
+    
+    const Vergangenheit = useHistory()
+   /*
     useEffect(() => {
+      
+        Promise.all([
+            fetch("http://localhost:5000/RandomQuestion").then(res => res.json()),
+            fetch(`http://localhost:5000/RandomQuestion/${land}`).then(res => res.json())
+        ]).then(([urlOneData, urlTwoData]) => {
+            console.log("urlOneData=", urlOneData)
+            console.log("urlTwoData=", urlTwoData)
+            console.log("mergedData=", [...urlOneData, ...urlTwoData])
 
-        fetch("/RandomQuestion")
+            setData([...urlOneData, ...urlTwoData]);
 
-            .then((Response) => {
-                console.log("Response=", Response);
-                Response.json().then((antwort) => {
-                 
-                    const fragen = antwort;
-                    console.log("antwort=", antwort)
-                    //nur data fragen mit dtaenbank gefüllt
-                    setData(fragen);
-                });
-            })
-            .catch((fehler) => {
-                console.error(fehler);
-            });
-        const stats = "Berlin";
-        fetch(`/RandomQuestion ${stats}`)
+        })
+    }, [])
 
-            .then((Response) => {
-                console.log("Response=", Response);
-                Response.json().then((antwort) => {
-                  
-                    const fragen = antwort;
-                    console.log("antwort=", antwort)
-                   
-                    setData(data=>[...data,...fragen])
-                });
-            })
-            .catch((fehler) => {
-                console.error(fehler);
-            });
-    }, []);
- 
 */
-useEffect(()=>{
-    const stats = "Berlin";
-    Promise.all([
-        fetch("http://localhost:5000/RandomQuestion").then(res => res.json()),
-        fetch(`http://localhost:5000/RandomQuestion/${stats}`).then(res => res.json())
-    ]).then(([urlOneData, urlTwoData]) => {
-        setData({...urlOneData,...urlTwoData });
-    })
-},[])
+   const  teststarten=()=>{
+const land=document.querySelector("#stats").value;
 
+        Promise.all([
+            fetch("/RandomQuestion").then(res => res.json()),
+            fetch(`/RandomQuestion/${land}`).then(res => res.json())
+        ]).then(([urlOneData, urlTwoData]) => {
+            console.log("urlOneData=", urlOneData)
+            console.log("urlTwoData=", urlTwoData)
+            console.log("mergedData=", [...urlOneData, ...urlTwoData])
+
+            setData([...urlOneData, ...urlTwoData]);
+
+        })
+    }
+
+    
     const VorherigeAufgabe = () => {
         if (questionIndex !== 0)
             setQuestionIndex(questionIndex - 1)
@@ -74,25 +57,53 @@ useEffect(()=>{
 
     }
 
-  
+    const zurInfo = () => {
+        Vergangenheit.push(
+            "/Info"
+        )
+    }
+
 
     return (
         <div>
 
             <div className="body-testSeite">
-             <h1>Randomfragen</h1>
+               
+                <label>Stats:</label>
+                <select id="stats" name="stats">
+
+                    <option value="Baden-Württemberg">Baden-Württemberg </option>
+                    <option value="Bayern">Bayern </option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Brandenburg">Brandenburg </option>
+                    <option value="Bremen">Bremen</option>
+                    <option value="Hamburg">Hamburg</option>
+                    <option value="Hessen">Hessen</option>
+                    <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+                    <option value="Niedersachsen">Niedersachsen</option>
+                    <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
+                    <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
+                    <option value="Saarland">Saarland</option>
+                    <option value="Sachsen">Sachsen</option>
+                    <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+                    <option value="Schleswig-Holstein">Schleswig-Holstein </option>
+                    <option value="Thüringen">Thüringen</option>
+
+                </select>
+                <button onClick={teststarten}>Start zum Test</button>
                 <div className="container-testSeite">
                     {data.length > 0 && <Containerfragen propsQuestion={data[questionIndex]} propsQuestionLänge={data.length}
                         propsQuestionIndex={questionIndex + 1}>
                     </Containerfragen>}
 
+
                     <div>
                         <div className="containerButtonUnten">
 
-                       
+                            <button onClick={zurInfo}>Info</button>
                             <button onClick={VorherigeAufgabe}>Vorherige Aufgabe</button>
                             <button onClick={NächsteAufgabe}>Nächste Aufgabe</button>
-                            
+
                         </div>
 
                     </div>
@@ -100,7 +111,8 @@ useEffect(()=>{
 
 
             </div>
-            
+          
+
         </div>
 
     )
