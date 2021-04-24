@@ -1,34 +1,36 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Containerfragen from "./Containerfragen";
-import {useState } from "react";
-import { useHistory } from 'react-router-dom'
+import Uhr from "../components/Uhr"
+import { useState } from "react";
+
 //import axios from 'axios';
 
 const Test = () => {
 
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0)
-    
-    const Vergangenheit = useHistory()
-   /*
-    useEffect(() => {
-      
-        Promise.all([
-            fetch("http://localhost:5000/RandomQuestion").then(res => res.json()),
-            fetch(`http://localhost:5000/RandomQuestion/${land}`).then(res => res.json())
-        ]).then(([urlOneData, urlTwoData]) => {
-            console.log("urlOneData=", urlOneData)
-            console.log("urlTwoData=", urlTwoData)
-            console.log("mergedData=", [...urlOneData, ...urlTwoData])
 
-            setData([...urlOneData, ...urlTwoData]);
-
-        })
-    }, [])
-
-*/
-   const  teststarten=()=>{
-const land=document.querySelector("#stats").value;
+    const [showUhr, setShowIhr] = useState('start')
+    /*
+     useEffect(() => {
+       
+         Promise.all([
+             fetch("http://localhost:5000/RandomQuestion").then(res => res.json()),
+             fetch(`http://localhost:5000/RandomQuestion/${land}`).then(res => res.json())
+         ]).then(([urlOneData, urlTwoData]) => {
+             console.log("urlOneData=", urlOneData)
+             console.log("urlTwoData=", urlTwoData)
+             console.log("mergedData=", [...urlOneData, ...urlTwoData])
+ 
+             setData([...urlOneData, ...urlTwoData]);
+ 
+         })
+     }, [])
+ 
+ */
+    const teststarten = () => {
+        setShowIhr('add-time')
+        const land = document.querySelector("#stats").value;
 
         Promise.all([
             fetch("/RandomQuestion").then(res => res.json()),
@@ -43,7 +45,7 @@ const land=document.querySelector("#stats").value;
         })
     }
 
-    
+
     const VorherigeAufgabe = () => {
         if (questionIndex !== 0)
             setQuestionIndex(questionIndex - 1)
@@ -56,19 +58,13 @@ const land=document.querySelector("#stats").value;
 
 
     }
-
-    const zurInfo = () => {
-        Vergangenheit.push(
-            "/Info"
-        )
-    }
-
-
+   
+    
     return (
         <div>
 
             <div className="body-testSeite">
-               
+
                 <label>Stats:</label>
                 <select id="stats" name="stats">
 
@@ -90,7 +86,8 @@ const land=document.querySelector("#stats").value;
                     <option value="Thüringen">Thüringen</option>
 
                 </select>
-                <button onClick={teststarten}>Start zum Test</button>
+                <button onClick={teststarten}> Start zum Test  {showUhr === 'add-time' && <Uhr />} </button>
+             
                 <div className="container-testSeite">
                     {data.length > 0 && <Containerfragen propsQuestion={data[questionIndex]} propsQuestionLänge={data.length}
                         propsQuestionIndex={questionIndex + 1}>
@@ -99,11 +96,17 @@ const land=document.querySelector("#stats").value;
 
                     <div>
                         <div className="containerButtonUnten">
-
-                            <button onClick={zurInfo}>Info</button>
+                      
+                      
+                      
+                       
                             <button onClick={VorherigeAufgabe}>Vorherige Aufgabe</button>
                             <button onClick={NächsteAufgabe}>Nächste Aufgabe</button>
 
+
+                        
+                            
+                           
                         </div>
 
                     </div>
@@ -111,7 +114,7 @@ const land=document.querySelector("#stats").value;
 
 
             </div>
-          
+
 
         </div>
 
