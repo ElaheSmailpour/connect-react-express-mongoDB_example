@@ -9,8 +9,8 @@ const Test = () => {
 
     const [data, setData] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0)
-
-    const [showUhr, setShowIhr] = useState('start')
+const [showbutton,setshowbutton]=useState(false)
+   // const [showUhr, setShowUhr] = useState('start')
     /*
      useEffect(() => {
        
@@ -29,7 +29,8 @@ const Test = () => {
  
  */
     const teststarten = () => {
-        setShowIhr('add-time')
+        setshowbutton(true)
+      //  setShowUhr('add-time')
         const land = document.querySelector("#stats").value;
 
         Promise.all([
@@ -58,10 +59,10 @@ const Test = () => {
 
 
     }
-   
+   // <button onClick={teststarten}> Start zum Test  {showUhr === 'add-time' && <Uhr />} </button>
     
     return (
-        <div>
+        
 
             <div className="body-testSeite">
 
@@ -86,38 +87,35 @@ const Test = () => {
                     <option value="Thüringen">Thüringen</option>
 
                 </select>
-                <button onClick={teststarten}> Start zum Test  {showUhr === 'add-time' && <Uhr />} </button>
-             
+              
+                <button onClick={teststarten}> Start zum Test     </button>
+            {showbutton ?
+               
+           
                 <div className="container-testSeite">
+                        <Uhr />
                     {data.length > 0 && <Containerfragen propsQuestion={data[questionIndex]} propsQuestionLänge={data.length}
                         propsQuestionIndex={questionIndex + 1}>
                     </Containerfragen>}
 
-
-                    <div>
-                        <div className="containerButtonUnten">
-                      
-                      
-                      
+                   
+                    
                        
                             <button onClick={VorherigeAufgabe}>Vorherige Aufgabe</button>
                             <button onClick={NächsteAufgabe}>Nächste Aufgabe</button>
-
-
-                        
                             
-                           
-                        </div>
+                
+                    
 
-                    </div>
+
                 </div>
+                : !showbutton}
+</div>
+
+            
 
 
-            </div>
-
-
-        </div>
-
+        
     )
 
 }

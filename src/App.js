@@ -2,12 +2,12 @@
 //import Data from './components/Data'
 //import Test from "./components/TestSeite"
 //import Fragen from "./components/Fragen"
-import StartSeite from"./components/StartSeite"
+import Navbar from"./components/Navbar"
 function App() {
   return (
     <div className="App">
  
- <StartSeite/>
+ <Navbar/>
     
     </div>
   );

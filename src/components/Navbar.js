@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter as Router,
  
@@ -6,14 +7,18 @@ import {
 } from "react-router-dom";
 
 import TestSeite from "./TestSeite"
-const StartSeite=()=>{
+
+const Navbar=()=>{
     return(
       <Router>
         <div className="StartSeite">
             
 <nav>
-        <Link to={`/TestSeite`}>Test</Link>
-      </nav>
+
+
+  
+       <Link to={`/TestSeite`}>Zum Test</Link>
+    </nav>
       <main>
         <Route  exact path="/TestSeite">
           <TestSeite />
@@ -26,4 +31,4 @@ const StartSeite=()=>{
     )
 }
 
-export default StartSeite
+export default Navbar
